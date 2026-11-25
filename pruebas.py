@@ -1,8 +1,4 @@
-"""Levanta los 4 servicios en local, ejecuta las pruebas y los apaga.
-
-Uso:  python pruebas.py
-Requiere: pip install -r orquestador/requirements.txt
-"""
+# pruebas locales: python pruebas.py
 import os
 import subprocess
 import sys

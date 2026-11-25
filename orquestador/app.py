@@ -11,7 +11,6 @@ TIMEOUT = float(os.getenv('HTTP_TIMEOUT', '20'))
 
 
 def consultar(base_url, ruta):
-    """Llama a un microservicio y traduce cualquier falla a (None, mensaje, código HTTP)."""
     if not base_url.startswith(('https://', 'http://')):
         return None, 'URL del microservicio no configurada', 503
     try:
@@ -57,22 +56,22 @@ def paz_y_salvo(codigo):
     if not re.fullmatch(r'\d{8}', codigo):
         return jsonify({'estado': 'ERROR', 'mensaje': 'El código estudiantil debe tener 8 dígitos'}), 400
 
-    # Paso 1: Registro Académico
+    # academico
     estudiante, msg, cod = consultar(ACADEMICO_URL, f'/estudiantes/{codigo}')
     if msg:
         return error('academico', msg, cod)
 
-    # Paso 2: Biblioteca
+    # biblioteca
     biblioteca, msg, cod = consultar(BIBLIOTECA_URL, f'/usuarios/{codigo}/prestamos')
     if msg:
         return error('biblioteca', msg, cod)
 
-    # Paso 3: Finanzas
+    # finanzas
     finanzas, msg, cod = consultar(FINANZAS_URL, f'/estado-cuenta/{codigo}')
     if msg:
         return error('finanzas', msg, cod)
 
-    # Consolidación: el orquestador aplica la regla del proceso con lo que respondió cada sistema
+    # revisar requisitos
     motivos = []
     faltan = estudiante['creditos_requeridos'] - estudiante['creditos_aprobados']
     if faltan > 0:

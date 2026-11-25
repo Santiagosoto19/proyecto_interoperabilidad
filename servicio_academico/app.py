@@ -3,7 +3,7 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-# Datos ficticios del Sistema de Registro Académico
+# datos de prueba
 estudiantes = [
     {'codigo': '20211001', 'nombre': 'Laura Pérez', 'programa': 'Ingeniería de Sistemas',
      'creditos_aprobados': 160, 'creditos_requeridos': 160},

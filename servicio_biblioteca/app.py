@@ -3,7 +3,7 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-# Datos ficticios del Sistema de Biblioteca (préstamos activos y multas)
+# datos de prueba
 prestamos = {
     '20211001': {'prestamos_activos': [], 'multas_pendientes': 0},
     '20211002': {'prestamos_activos': [], 'multas_pendientes': 0},
